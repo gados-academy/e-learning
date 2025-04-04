@@ -39,12 +39,12 @@ type TypographyProps = {
   children: React.ReactNode;
 };
 
-export const Typography: React.FC<TypographyProps> = ({
+export const Typography = ({
   as = "p",
   variant,
   className = "",
   children,
-}) => {
+}: TypographyProps) => {
   const Component = as;
 
   return (
