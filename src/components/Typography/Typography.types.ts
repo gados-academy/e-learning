@@ -1,6 +1,6 @@
-import React, { JSX } from "react";
+import { JSX } from "react";
 
-type TypographyVariants =
+export type TypographyVariants =
   | "text-display-1"
   | "text-display-2"
   | "text-display-3"
@@ -36,27 +36,11 @@ type TypographyVariants =
   | "text-body-xs-500"
   | "text-body-xs-600";
 
-type TypographyTag = keyof JSX.IntrinsicElements;
+export type TypographyTag = keyof JSX.IntrinsicElements;
 
-type TypographyProps = {
+export type TypographyProps = {
   as: TypographyTag;
   variant: TypographyVariants;
   className?: string;
   children: React.ReactNode;
 } & Omit<JSX.IntrinsicElements[TypographyTag], "className" | "children">;
-
-export const Typography = ({
-  as,
-  variant,
-  className = "",
-  children,
-  ...rest
-}: TypographyProps) => {
-  const Component = (as || "p") as React.ElementType;
-
-  return (
-    <Component className={`${variant} ${className}`} {...rest}>
-      {children}
-    </Component>
-  );
-};

@@ -1,10 +1,10 @@
-import { Typography } from "@/components/Typography";
+import { Typography } from "@/components/Typography/Typography";
 
 export default function Home() {
   return (
     <div>
-      <Typography as="h1" variant="text-display-1">
-        Hello World
+      <Typography as="h1" variant="text-body-md-400">
+        Hello Worldw
       </Typography>
     </div>
   );
