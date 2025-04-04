@@ -1,6 +1,5 @@
 import React, { JSX } from "react";
 
-// Variantes da sua tipografia
 type TypographyVariants =
   | "text-display-1"
   | "text-display-2"
@@ -46,7 +45,7 @@ type TypographyProps = {
   children: React.ReactNode;
 } & Omit<JSX.IntrinsicElements[TypographyTag], "className" | "children">;
 
-export const Typography =({
+export const Typography = ({
   as,
   variant,
   className = "",
