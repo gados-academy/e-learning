@@ -9,7 +9,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "vitest --config vitest.unit.config.ts"
+    "test": "vitest --config vitest.unit.config.ts",
+    "test:e2e": "npx playwright test"
   },
   "dependencies": {
     "next": "15.2.4",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.51.1",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-onboarding": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
