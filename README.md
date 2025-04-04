@@ -12,7 +12,7 @@ Test:
 ```bash
 npm run test
 
-#or
+# or
 
 npm run test:e2e
 ```
