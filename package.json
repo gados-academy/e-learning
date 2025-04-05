@@ -10,9 +10,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest --config vitest.unit.config.ts",
+    "test:coverage": "vitest --config vitest.unit.config.ts --coverage",
     "test:e2e": "npx playwright test"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

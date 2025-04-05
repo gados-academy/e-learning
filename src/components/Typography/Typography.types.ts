@@ -39,7 +39,7 @@ export type TypographyVariants =
 export type TypographyTag = keyof JSX.IntrinsicElements;
 
 export type TypographyProps = {
-  as: TypographyTag;
+  tag: TypographyTag;
   variant: TypographyVariants;
   className?: string;
   children: React.ReactNode;
