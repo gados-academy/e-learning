@@ -9,5 +9,12 @@ export default defineConfig({
     environment: "jsdom",
     include: ["src/**/*.test.tsx", "src/**/*.test.ts"],
     exclude: ["**/*.stories.tsx", "**/*.stories.ts"],
+    coverage: {
+      include: ["src/*/**/*.tsx"],
+      exclude: ["**/*.stories.tsx", "**/*.stories.ts"],
+      thresholds: {
+        functions: 80,
+      },
+    },
   },
 });

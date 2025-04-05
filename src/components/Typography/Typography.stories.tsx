@@ -5,7 +5,7 @@ const meta: Meta<typeof Typography> = {
   title: "Components/Typography",
   component: Typography,
   argTypes: {
-    as: {
+    tag: {
       control: "select",
       options: ["p", "span", "label", "h1", "h2", "h3", "h4", "h5", "h6"],
     },
@@ -56,7 +56,7 @@ const meta: Meta<typeof Typography> = {
     },
   },
   args: {
-    as: "p",
+    tag: "p",
     variant: "text-body-md-400",
     children: "Exemplo de texto tipográfico",
   },
