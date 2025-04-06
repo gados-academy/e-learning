@@ -4,7 +4,7 @@ import { Typography } from "./Typography";
 
 test("Typography", () => {
   render(
-    <Typography as="h1" variant="text-display-1">
+    <Typography tag="h1" variant="text-display-1">
       Home
     </Typography>
   );

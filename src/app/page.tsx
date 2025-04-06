@@ -1,11 +1,18 @@
-import { Typography } from "@/components/Typography/Typography";
+import { Button } from "@/components/Button/Default/Button";
+import { ArrowLeft } from "@phosphor-icons/react";
 
 export default function Home() {
   return (
     <div>
-      <Typography as="h1" variant="text-body-md-400">
-        Hello Worldw
-      </Typography>
+      <Button
+        text="Button"
+        variant="tinted"
+        color="danger"
+        disabled
+        icon={<ArrowLeft />}
+        iconPosition="start"
+        onlyIcon
+      />
     </div>
   );
 }
