@@ -24,4 +24,5 @@ export interface ButtonProps
   onlyIcon?: boolean;
   icon?: ReactNode;
   iconPosition?: "start" | "end";
+  rounded?: boolean;
 }

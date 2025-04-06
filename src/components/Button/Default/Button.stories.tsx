@@ -29,6 +29,9 @@ const meta: Meta<typeof Button> = {
       control: "select",
       options: ["start", "end"],
     },
+    rounded: {
+      control: "boolean",
+    },
   },
   args: {
     variant: "solid",
@@ -38,6 +41,7 @@ const meta: Meta<typeof Button> = {
     onlyIcon: false,
     icon: <ArrowLeft />,
     iconPosition: "start",
+    disabled: true,
   },
 };
 export default meta;

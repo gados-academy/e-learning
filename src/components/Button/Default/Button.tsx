@@ -16,6 +16,7 @@ export const Button = ({
   onlyIcon,
   icon,
   iconPosition,
+  rounded,
   ...props
 }: ButtonProps) => {
   const sizeClasses: Record<ButtonSize, SizeClass> = {
@@ -73,16 +74,16 @@ export const Button = ({
 
   const onlyIconStyle = "flex items-center justify-center h-[3rem] w-[3rem]";
 
-  const base = "flex items-center justify-center";
-
+  const base = `flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 focus:ring-offset-background`;
+  const roundClass = rounded ? "rounded-full" : "";
   const finalClass = `${base} ${colorClasses[color][variant]} ${
     sizeClasses[size].button
-  } ${onlyIcon ? onlyIconStyle : ""} ${className}`.trim();
+  } ${onlyIcon ? onlyIconStyle : ""} ${roundClass} ${className}`.trim();
 
   return (
     <button className={finalClass} {...props}>
       <Typography
-        tag="span"
+        tag="div"
         variant={sizeClasses[size].text}
         className={`${sizeClasses[size].text} flex ${
           iconPosition === "start" ? "flex-row" : "flex-row-reverse"
