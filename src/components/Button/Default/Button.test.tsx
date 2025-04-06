@@ -50,7 +50,7 @@ describe("Button", () => {
     const button = screen.getByRole("button");
     expect(button).toHaveClass("rounded-full");
   });
-  it("should render the button with diferent size props", () => {
+  it("should render the button with different  size props", () => {
     const props: ButtonProps = {
       variant: "solid",
       color: "primary",

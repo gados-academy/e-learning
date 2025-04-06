@@ -85,7 +85,7 @@ export const Button = ({
       <Typography
         tag="div"
         variant={sizeClasses[size].text}
-        className={`${sizeClasses[size].text} flex ${
+        className={`flex ${
           iconPosition === "start" ? "flex-row" : "flex-row-reverse"
         } items-center justify-center gap-2`}
       >
