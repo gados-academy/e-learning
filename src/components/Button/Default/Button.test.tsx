@@ -24,7 +24,7 @@ describe("Button", () => {
   afterEach(() => {
     cleanup();
   });
-  it("should render the button with default props", () => {
+  it("render the button with default props", () => {
     const props: ButtonProps = {
       variant: "solid",
       color: "primary",
@@ -38,7 +38,7 @@ describe("Button", () => {
     expect(button).not.toHaveClass("rounded-full");
     expect(button).toHaveClass("bg-primary-500 px-[1.5rem]");
   });
-  it("should render the button with rounded props", () => {
+  it("render the button with rounded props", () => {
     const props: ButtonProps = {
       variant: "solid",
       color: "primary",
@@ -50,7 +50,7 @@ describe("Button", () => {
     const button = screen.getByRole("button");
     expect(button).toHaveClass("rounded-full");
   });
-  it("should render the button with different  size props", () => {
+  it("render the button with different  size props", () => {
     const props: ButtonProps = {
       variant: "solid",
       color: "primary",
@@ -61,7 +61,7 @@ describe("Button", () => {
     const button = screen.getByRole("button");
     expect(button).toHaveClass("px-[1rem]");
   });
-  it("should render the button without text", () => {
+  it("render the button without text", () => {
     const props: ButtonProps = {
       variant: "solid",
       color: "primary",
@@ -74,7 +74,7 @@ describe("Button", () => {
     const button = screen.getByRole("button");
     expect(button).not.toHaveTextContent("Button");
   });
-  it("should render the button with icon at start", () => {
+  it("render the button with icon at start", () => {
     const props: ButtonProps = {
       variant: "solid",
       color: "primary",
@@ -95,7 +95,7 @@ describe("Button", () => {
     expect(div).toHaveClass("flex-row");
     expect(div).not.toHaveClass("flex-row-reverse");
   });
-  it("should click ", () => {
+  it("click ", () => {
     const handleClick = vi.fn();
     const props: ButtonProps = {
       variant: "solid",
@@ -113,7 +113,7 @@ describe("Button", () => {
     expect(handleClick).toHaveBeenCalled();
     expect(button).toBeDefined();
   });
-  it("should not click ", () => {
+  it("not click ", () => {
     const handleClick = vi.fn();
     const props: ButtonProps = {
       variant: "solid",
