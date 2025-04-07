@@ -21,15 +21,15 @@ export const Button = ({
 }: ButtonProps) => {
   const sizeClasses: Record<ButtonSize, SizeClass> = {
     s: {
-      button: "px-[1rem]",
+      button: "px-[1rem] py-[0.5rem]",
       text: "text-button-s",
     },
     m: {
-      button: "px-[1.5rem]",
+      button: "px-[1.5rem] py-[0.75rem]",
       text: "text-button-m",
     },
     l: {
-      button: "px-[2rem]",
+      button: "px-[2rem] py-[1rem]",
       text: "text-button-l",
     },
   };
