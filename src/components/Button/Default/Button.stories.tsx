@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
-import { ArrowLeft } from "@phosphor-icons/react";
+import { IconPhosphor } from "@/components/Icon/Icon";
 
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
@@ -39,7 +39,7 @@ const meta: Meta<typeof Button> = {
     size: "m",
     text: "Button",
     onlyIcon: false,
-    icon: <ArrowLeft />,
+    icon: <IconPhosphor name="ArrowLeft" size={24} color="currentColor" />,
     iconPosition: "start",
     disabled: true,
   },
