@@ -27,6 +27,42 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
     onSelect(value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
+    if (!isOpen) return;
+
+    const currentFocusIndex = findFocusedIndex();
+
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        const nextIndex = (currentFocusIndex + 1) % buttonRefs.current.length;
+        buttonRefs.current[nextIndex]?.focus();
+        break;
+
+      case "ArrowUp":
+        event.preventDefault();
+        const prevIndex =
+          (currentFocusIndex - 1 + buttonRefs.current.length) %
+          buttonRefs.current.length;
+        buttonRefs.current[prevIndex]?.focus();
+        break;
+
+      case "Enter":
+      case " ":
+        event.preventDefault();
+        if (currentFocusIndex !== -1 && items[currentFocusIndex]) {
+          handleSelect(items[currentFocusIndex].value);
+        }
+        break;
+
+      case "Escape":
+      case "Backspace":
+        event.preventDefault();
+        setIsOpen(false);
+        break;
+    }
+  };
+
   const assignRefAndFocusFirstRef = useCallback(
     (node: HTMLButtonElement | null, index: number) => {
       buttonRefs.current[index] = node;
@@ -68,7 +104,12 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
       </div>
 
       {isOpen && (
-        <ul className="border-2 border-t-0 border-gray-100">{renderItems()}</ul>
+        <ul
+          onKeyDown={handleKeyDown}
+          className="border-2 border-t-0 border-gray-100"
+        >
+          {renderItems()}
+        </ul>
       )}
     </div>
   );
