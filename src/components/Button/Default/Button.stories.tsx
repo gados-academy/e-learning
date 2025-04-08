@@ -24,7 +24,6 @@ const meta: Meta<typeof Button> = {
     onlyIcon: {
       control: "boolean",
     },
-
     iconPosition: {
       control: "select",
       options: ["start", "end"],
