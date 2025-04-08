@@ -30,20 +30,32 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
     if (!isOpen) return;
 
-    const currentFocusIndex = findFocusedIndex();
+    let currentFocusIndex = findFocusedIndex();
+    const lastIndex = buttonRefs.current.length - 1;
 
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
-        const nextIndex = (currentFocusIndex + 1) % buttonRefs.current.length;
+
+        const nextIndex = ++currentFocusIndex;
+
+        if (lastIndex < nextIndex) {
+          buttonRefs.current[0]?.focus();
+          return;
+        }
+
         buttonRefs.current[nextIndex]?.focus();
         break;
 
       case "ArrowUp":
         event.preventDefault();
-        const prevIndex =
-          (currentFocusIndex - 1 + buttonRefs.current.length) %
-          buttonRefs.current.length;
+        const prevIndex = --currentFocusIndex;
+
+        if (prevIndex < 0) {
+          buttonRefs.current[lastIndex]?.focus();
+          return;
+        }
+
         buttonRefs.current[prevIndex]?.focus();
         break;
 
