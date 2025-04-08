@@ -5,6 +5,7 @@ export type ButtonVariant = "solid" | "tinted" | "ghost" | "simple";
 export type ButtonColor =
   | "primary"
   | "secondary"
+  | "gray"
   | "success"
   | "warning"
   | "danger";
