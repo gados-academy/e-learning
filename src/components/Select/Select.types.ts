@@ -4,5 +4,6 @@ export type SelectItem = {
 };
 export type SelectProps = {
   placeholder: string;
+  onSelect: (value: string) => void;
   items: SelectItem[];
 };

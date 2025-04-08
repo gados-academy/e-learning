@@ -1,22 +1,54 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { SelectProps } from "./Select.types";
 import { CaretDown } from "@phosphor-icons/react";
 import { Typography } from "../Typography/Typography";
 import { Button } from "../Button/Default/Button";
 
-export const Select = ({ placeholder, items }: SelectProps) => {
+export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleOpen = () => setIsOpen((prev) => !prev);
+  const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
+
+  const findFocusedIndex = () => {
+    const focusedElement = document.activeElement;
+    if (!focusedElement) {
+      return -1;
+    }
+
+    return buttonRefs.current.findIndex((ref) => ref === focusedElement);
+  };
+
+  const toggleOpen = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleSelect = (value: string) => {
+    toggleOpen();
+    onSelect(value);
+  };
+
+  const assignRefAndFocusFirstRef = useCallback(
+    (node: HTMLButtonElement | null, index: number) => {
+      buttonRefs.current[index] = node;
+
+      if (node && index === 0) {
+        node.focus();
+      }
+    },
+    []
+  );
 
   const renderItems = () =>
-    items.map((item) => (
-      <li key={item.value}>
+    items.map((item, index) => (
+      <li key={item.value} className="font-light">
         <Button
-          variant="ghost"
+          tabIndex={index === 0 ? 0 : -1}
           size="s"
-          className="w-full text-black justify-start"
+          variant="ghost"
           text={item.label}
+          onClick={() => handleSelect(item.value)}
+          className="w-full !text-gray-700 justify-start"
+          ref={(node) => assignRefAndFocusFirstRef(node, index)}
         />
       </li>
     ));

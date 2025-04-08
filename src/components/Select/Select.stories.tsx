@@ -19,6 +19,9 @@ const meta: Meta<typeof Select> = {
       { label: "Item 5", value: "5" },
       { label: "Item 6", value: "6" },
     ],
+    onSelect(value) {
+      alert(`you selected: ${value}`);
+    },
   },
 };
 
