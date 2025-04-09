@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { SelectProps } from "./Select.types";
+import { SelectDirection, SelectProps } from "./Select.types";
 import { CaretDown } from "@phosphor-icons/react";
 import { Typography } from "../Typography/Typography";
 import { Button } from "../Button/Default/Button";
@@ -27,6 +27,22 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
     onSelect(value);
   };
 
+  const updateButtonFocus = useCallback(
+    (nextIndex: number, direction: SelectDirection) => {
+      const lastIndex = buttonRefs.current.length - 1;
+      const increaseIndex = nextIndex > 0 ? nextIndex - 1 : lastIndex;
+      const decreaseIndex = nextIndex === lastIndex ? 0 : nextIndex + 1;
+
+      const indexDirection =
+        direction === "decreasing" ? decreaseIndex : increaseIndex;
+
+      buttonRefs.current[indexDirection]?.setAttribute("tabindex", "-1");
+      buttonRefs.current[nextIndex]?.setAttribute("tabindex", "0");
+      buttonRefs.current[nextIndex]?.focus();
+    },
+    []
+  );
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
     if (!isOpen) return;
 
@@ -38,25 +54,27 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
         event.preventDefault();
 
         const nextIndex = ++currentFocusIndex;
+        const isLastElementFocused = lastIndex < nextIndex;
 
-        if (lastIndex < nextIndex) {
-          buttonRefs.current[0]?.focus();
+        if (isLastElementFocused) {
+          updateButtonFocus(0, "increasing");
           return;
         }
 
-        buttonRefs.current[nextIndex]?.focus();
+        updateButtonFocus(nextIndex, "increasing");
         break;
 
       case "ArrowUp":
         event.preventDefault();
         const prevIndex = --currentFocusIndex;
+        const isFirstElementFocused = prevIndex < 0;
 
-        if (prevIndex < 0) {
-          buttonRefs.current[lastIndex]?.focus();
+        if (isFirstElementFocused) {
+          updateButtonFocus(lastIndex, "decreasing");
           return;
         }
 
-        buttonRefs.current[prevIndex]?.focus();
+        updateButtonFocus(prevIndex, "decreasing");
         break;
 
       case "Enter":
