@@ -4,8 +4,14 @@ import { CaretDown } from "@phosphor-icons/react";
 import { Typography } from "../Typography/Typography";
 import { Button } from "../Button/Default/Button";
 
-export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
+export const Select = ({
+  placeholder,
+  items,
+  defaultValue,
+  onSelect,
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(defaultValue ?? "");
 
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -23,8 +29,12 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
   };
 
   const handleSelect = (value: string) => {
-    toggleOpen();
+    const findLabel = items.find((item) => item.value === value)?.label;
+    if (!findLabel) return;
+
+    setSelectedItem(findLabel);
     onSelect(value);
+    toggleOpen();
   };
 
   const updateButtonFocus = useCallback(
@@ -79,6 +89,8 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
 
       case "Enter":
       case " ":
+      case "Space":
+      case "Tab":
         event.preventDefault();
         if (currentFocusIndex !== -1 && items[currentFocusIndex]) {
           handleSelect(items[currentFocusIndex].value);
@@ -89,6 +101,14 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
       case "Backspace":
         event.preventDefault();
         setIsOpen(false);
+        break;
+
+      case "Home":
+        updateButtonFocus(0, "decreasing");
+        break;
+
+      case "End":
+        updateButtonFocus(lastIndex, "decreasing");
         break;
     }
   };
@@ -120,21 +140,32 @@ export const Select = ({ placeholder, items, onSelect }: SelectProps) => {
     ));
 
   return (
-    <div>
+    <div
+      aria-expanded={isOpen}
+      role="combobox"
+      aria-haspopup="listbox"
+      aria-controls="listbox-id"
+    >
       <div>
         <button
-          className="flex cursor-pointer border-2 items-center px-4 py-3 border-gray-100 w-full justify-between"
           onClick={toggleOpen}
+          className="flex cursor-pointer border-2 items-center px-4 py-3 border-gray-100 w-full justify-between"
         >
-          <Typography tag="p" className="text-gray-500" variant="text-button-s">
-            {placeholder}
+          <Typography
+            tag="p"
+            variant="text-button-s"
+            className={selectedItem ? "text-gray-700" : "text-gray-500"}
+          >
+            {selectedItem || placeholder}
           </Typography>
-          <CaretDown size={16} className="" />
+          <CaretDown size={16} />
         </button>
       </div>
 
       {isOpen && (
         <ul
+          id="listbox-id"
+          role="listbox"
           onKeyDown={handleKeyDown}
           className="border-2 border-t-0 border-gray-100"
         >
