@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FilterButton } from "./FilterButton";
+import { FilterButton } from "@/components/FilterButton/FilterButton";
 
 const meta: Meta<typeof FilterButton> = {
   title: "Components/FilterButton",

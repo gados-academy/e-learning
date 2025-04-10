@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { FilterButton } from "./FilterButton";
-import { FilterButtonProps } from "./FilterButton.types";
+import { FilterButton } from "@/components/FilterButton/FilterButton";
+import { FilterButtonProps } from "@/components/FilterButton/FilterButton.types";
 import { describe, it, expect, afterEach } from "vitest";
 import "@testing-library/jest-dom/vitest";
 
