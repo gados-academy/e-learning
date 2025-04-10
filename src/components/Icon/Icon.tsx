@@ -21,5 +21,7 @@ export const IconPhosphor: React.FC<IconPhosphorProps> = ({
     return null;
   }
 
-  return <SpecificIcon size={size} color={color} />;
+  return (
+    <SpecificIcon className="pointer-events-none" size={size} color={color} />
+  );
 };
