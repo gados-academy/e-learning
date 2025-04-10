@@ -1,12 +1,22 @@
 "use client";
 
+import { IconPhosphor } from "@/components/Icon/Icon";
 import { Input } from "@/components/Input/Default/Input";
-import { Chat } from "@phosphor-icons/react";
 
 export default function Home() {
   return (
     <div>
-      <Input placeholder="Enter text here" />
+      <Input
+        placeholder="Enter text here"
+        icon={<IconPhosphor name="Chats" />}
+        status="success"
+        rigthComponent={
+          <IconPhosphor
+            name="ArrowRight"
+            className="text-gray-500 cursor-pointer"
+          />
+        }
+      />
     </div>
   );
 }
