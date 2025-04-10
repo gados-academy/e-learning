@@ -6,7 +6,7 @@ export type SelectItem = {
 export type SelectDirection = "increasing" | "decreasing";
 
 export type SelectProps = {
-  placeholder: string;
+  label: string;
   defaultValue?: string;
   onSelect: (value: string) => void;
   items: SelectItem[];

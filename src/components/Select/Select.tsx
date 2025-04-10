@@ -5,7 +5,7 @@ import { Typography } from "@/components/Typography/Typography";
 import { Button } from "@/components/Button/Default/Button";
 
 export const Select = ({
-  placeholder,
+  label,
   items,
   defaultValue,
   onSelect,
@@ -126,12 +126,20 @@ export const Select = ({
 
   const renderItems = () =>
     items.map((item, index) => (
-      <li key={item.value} className="font-light">
+      <li
+        key={item.value}
+        // This prevents the screen reader from announcing "list with X items" and then "list item" for each option,
+        // focusing only on the button's role="option".
+        role="presentation"
+        className="font-light"
+      >
         <Button
           tabIndex={index === 0 ? 0 : -1}
           size="s"
+          role="option"
           variant="ghost"
           text={item.label}
+          aria-selected={item.value === selectedItem}
           onClick={() => handleSelect(item.value)}
           className="w-full !text-gray-700 justify-start"
           ref={(node) => assignRefAndFocusFirstRef(node, index)}
@@ -140,26 +148,32 @@ export const Select = ({
     ));
 
   return (
-    <div aria-expanded={isOpen}>
+    <div>
       <div>
         <button
+          aria-label={label}
           onClick={toggleOpen}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
           className="flex cursor-pointer border-2 items-center px-4 py-3 border-gray-100 w-full justify-between"
         >
           <Typography
-            tag="p"
+            tag="label"
             variant="text-button-s"
             className={selectedItem ? "text-gray-700" : "text-gray-500"}
           >
-            {selectedItem || placeholder}
+            {selectedItem || label}
           </Typography>
-          <CaretDown size={16} />
+          <CaretDown
+            data-open={isOpen}
+            size={16}
+            className="transition-transform data-[open=true]:rotate-180"
+          />
         </button>
       </div>
 
       {isOpen && (
         <ul
-          id="listbox-id"
           role="listbox"
           onKeyDown={handleKeyDown}
           className="border-2 border-t-0 border-gray-100"
