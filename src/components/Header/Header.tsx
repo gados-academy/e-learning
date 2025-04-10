@@ -5,7 +5,7 @@ import { Typography } from "@/components/Typography/Typography";
 import { cn } from "@/lib/utils";
 
 export const Header = () => {
-  interface NavItems {
+  interface NavItem {
     redirect: string;
     name: string;
   }
@@ -22,7 +22,7 @@ export const Header = () => {
   ];
 
   function getActiveNavItem(
-    navItems: NavItems[],
+    navItems: NavItem[],
     currentPath: string,
     currentHash: string
   ) {
