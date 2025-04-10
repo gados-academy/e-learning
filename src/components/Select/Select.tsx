@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from "react";
 import { SelectDirection, SelectProps } from "./Select.types";
 import { CaretDown } from "@phosphor-icons/react";
-import { Typography } from "../Typography/Typography";
-import { Button } from "../Button/Default/Button";
+import { Typography } from "@/components/Typography/Typography";
+import { Button } from "@/components/Button/Default/Button";
 
 export const Select = ({
   placeholder,
@@ -140,12 +140,7 @@ export const Select = ({
     ));
 
   return (
-    <div
-      aria-expanded={isOpen}
-      role="combobox"
-      aria-haspopup="listbox"
-      aria-controls="listbox-id"
-    >
+    <div aria-expanded={isOpen}>
       <div>
         <button
           onClick={toggleOpen}
