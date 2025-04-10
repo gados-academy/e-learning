@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Typography } from "@/components/Typography/Typography";
 import { cn } from "@/lib/utils";
 
@@ -21,17 +21,19 @@ export const Header = () => {
     { redirect: "/instructor", name: t("header:nav:instructor") },
   ];
 
-  function getActiveNavItem(navItems: NavItems[]) {
+  function getActiveNavItem(
+    navItems: NavItems[],
+    currentPath: string,
+    currentHash: string
+  ) {
     const currentNavItemIndex = navItems.findIndex(
-      (nav) =>
-        location.pathname === nav.redirect || location.hash === nav.redirect
+      (nav) => currentPath === nav.redirect || currentHash === nav.redirect
     );
-
     return currentNavItemIndex;
   }
-
+  const location = useLocation();
   const [activeItem, setActiveItem] = useState(() =>
-    getActiveNavItem(navItems)
+    getActiveNavItem(navItems, location.pathname, location.hash)
   );
 
   const renderNavItems = () => {
