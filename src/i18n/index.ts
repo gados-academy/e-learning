@@ -13,12 +13,17 @@ const resources = {
   },
 };
 
+const getSupportedLocale = (locale: string): string => {
+  const supportedLocales = Object.keys(resources);
+  return supportedLocales.includes(locale) ? locale : 'en-US';
+};
+
 i18n.use(initReactI18next).init({
   resources,
   ns: ['common'],
   defaultNS: 'common',
   keySeparator: ':',
-  lng: localStorage.getItem('@i18n') || navigator.language,
+  lng: localStorage.getItem('@i18n') || getSupportedLocale(navigator.language),
   interpolation: {
     escapeValue: false,
   },
