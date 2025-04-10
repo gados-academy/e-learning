@@ -1,12 +1,22 @@
+import { cn } from "@/lib/utils";
 import { IconPhosphor } from "../Icon/Icon";
 import { FilterButtonProps } from "./FilterButton.types";
 
-export function FilterButton({activeFilters}: FilterButtonProps) {
+export function FilterButton({ activeFilters, text,  ...props }: FilterButtonProps) {
+  const { className } = props;
   return (
-    <div className="flex items-center gap-2 bg-white max-w-42 border border-gray-300 rounded-md p-2 group">
-      <IconPhosphor name="Faders"/>
-      <div className="">Filter</div>
-      <div className="group-focus:bg-primary-500 group-focus:text-white bg-primary-100 text-primary-500 px-1.5 py-1">{activeFilters}</div>
-    </div>
+    <button 
+      {...props} 
+      className={cn(
+        "flex outline-0 items-center justify-center cursor-pointer gap-2 bg-white max-w-42 border border-primary-200 hover:border-primary-500 rounded-md py-2 px-6 group hover:text-primary-500",
+        className,
+      )}>
+        <IconPhosphor name="Faders" />
+        <div className="">{text}</div>
+        <div className="group-hover:bg-primary-500 group-hover:text-white bg-primary-100 
+        text-primary-500 px-1.5 py-1 ml-4">
+          {activeFilters}
+        </div>
+    </button>
   )
 }
