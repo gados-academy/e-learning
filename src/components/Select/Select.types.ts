@@ -10,4 +10,5 @@ export type SelectProps = {
   defaultValue?: string;
   onSelect: (value: string) => void;
   items: SelectItem[];
+  className?: string;
 };

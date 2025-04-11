@@ -9,6 +9,7 @@ export const Select = ({
   items,
   defaultValue,
   onSelect,
+  className,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(defaultValue ?? "");
@@ -50,7 +51,7 @@ export const Select = ({
       buttonRefs.current[nextIndex]?.setAttribute("tabindex", "0");
       buttonRefs.current[nextIndex]?.focus();
     },
-    []
+    [],
   );
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLUListElement>) => {
@@ -96,7 +97,6 @@ export const Select = ({
           handleSelect(items[currentFocusIndex].value);
         }
         break;
-
       case "Escape":
       case "Backspace":
         event.preventDefault();
@@ -121,18 +121,12 @@ export const Select = ({
         node.focus();
       }
     },
-    []
+    [],
   );
 
   const renderItems = () =>
     items.map((item, index) => (
-      <li
-        key={item.value}
-        // This prevents the screen reader from announcing "list with X items" and then "list item" for each option,
-        // focusing only on the button's role="option".
-        role="presentation"
-        className="font-light"
-      >
+      <li key={item.value} role="presentation" className="font-light">
         <Button
           tabIndex={index === 0 ? 0 : -1}
           size="s"
@@ -155,7 +149,7 @@ export const Select = ({
           onClick={toggleOpen}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          className="flex cursor-pointer border-2 items-center px-4 py-3 border-gray-100 w-full justify-between"
+          className={`flex cursor-pointer border-2 items-center px-4 py-3 border-gray-100 w-full justify-between ${className}`}
         >
           <Typography
             tag="label"
