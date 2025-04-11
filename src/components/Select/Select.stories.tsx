@@ -5,12 +5,12 @@ const meta: Meta<typeof Select> = {
   title: "Components/Select",
   component: Select,
   argTypes: {
-    placeholder: {
+    label: {
       type: "string",
     },
   },
   args: {
-    placeholder: "Select a element",
+    label: "Select a element",
     items: [
       { label: "Item 1", value: "1" },
       { label: "Item 2", value: "2" },
@@ -28,4 +28,14 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+
+  },
+};
+
+export const WithDefaultValue: Story = {
+  args: {
+    defaultValue: "item 1\n",
+  },
+};

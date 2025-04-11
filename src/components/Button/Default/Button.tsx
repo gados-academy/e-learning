@@ -1,4 +1,4 @@
-import { forwardRef } from "react"; // Necessário para forwardRef
+import { forwardRef } from "react";
 import { Typography } from "@/components/Typography/Typography";
 import {
   ButtonProps,
