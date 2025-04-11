@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { Typography } from "@/components/Typography/Typography";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +12,7 @@ export const Header = () => {
   }
 
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const navItems = [
     { redirect: "/", name: t("header:nav:home") },
@@ -21,19 +22,15 @@ export const Header = () => {
     { redirect: "/instructor", name: t("header:nav:instructor") },
   ];
 
-  function getActiveNavItem(
-    navItems: NavItem[],
-    currentPath: string,
-    currentHash: string
-  ) {
+  function getActiveNavItem(navItems: NavItem[], currentPath: string) {
     const currentNavItemIndex = navItems.findIndex(
-      (nav) => currentPath === nav.redirect || currentHash === nav.redirect
+      (nav) => currentPath === nav.redirect
     );
     return currentNavItemIndex;
   }
-  const location = useLocation();
+
   const [activeItem, setActiveItem] = useState(() =>
-    getActiveNavItem(navItems, location.pathname, location.hash)
+    getActiveNavItem(navItems, router.pathname)
   );
 
   const renderNavItems = () => {
@@ -43,19 +40,18 @@ export const Header = () => {
       return (
         <li
           className={cn(
-            `cursor-pointer  p-3 border-2 border-gray-900 text-gray-500 hover:text-white`,
+            `cursor-pointer p-3 border-2 border-gray-900 text-gray-500 hover:text-white`,
             isActive && "border-t-2 border-t-primary-500 text-white"
           )}
           data-active={isActive}
           key={item.redirect}
-          onClick={() => {
-            setActiveItem(index);
-            navigate(item.redirect);
-          }}
+          onClick={() => setActiveItem(index)}
         >
-          <Typography tag="a" variant="text-body-md-500">
-            {item.name}
-          </Typography>
+          <Link href={item.redirect}>
+            <Typography tag="a" variant="text-body-md-500">
+              {item.name}
+            </Typography>
+          </Link>
         </li>
       );
     });
@@ -64,7 +60,7 @@ export const Header = () => {
   return (
     <header className="flex items-center justify-between px-8 bg-gray-900 text-white">
       <nav>
-        <ul className="flex space-x-4 ">{renderNavItems()}</ul>
+        <ul className="flex space-x-4">{renderNavItems()}</ul>
       </nav>
       <div className="flex space-x-4">
         {/* TODO implementar componente de select */}
