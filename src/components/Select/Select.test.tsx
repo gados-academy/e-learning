@@ -131,5 +131,57 @@ describe("Select", () => {
         });
       });
     });
+
+    describe("and press arrow up", () => {
+      it("focus in the up item", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const secondItemEl = screen.getByRole("option", { name: /Item 2/i });
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          secondItemEl.focus();
+          expect(secondItemEl).toHaveFocus();
+
+          await userEvnt.keyboard("{ArrowUp}");
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          expect(secondItemEl).not.toHaveFocus();
+          expect(secondItemEl).toHaveAttribute("tabIndex", "-1");
+        });
+      });
+    });
+
+    describe("and press arrow up in the first item", () => {
+      it("focus in the last item", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+          const lastItemEl = screen.getByRole("option", { name: /Item 3/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.keyboard("{ArrowUp}");
+
+          expect(lastItemEl).toHaveFocus();
+          expect(lastItemEl).toHaveAttribute("tabIndex", "0");
+
+          expect(firstItemEl).not.toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "-1");
+        });
+      });
+    });
   });
 });
