@@ -78,6 +78,26 @@ describe("Select", () => {
       });
     });
 
+    describe("and click again", () => {
+      it("closes the select", async () => {
+        makeSut({});
+
+        const buttonEl = screen.getByRole("button");
+        userEvent.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvent.click(buttonEl);
+
+          expect(firstItemEl).not.toBeInTheDocument();
+        });
+      });
+    });
+
     describe("and press arrow down", () => {
       it("focus in the second item", async () => {
         makeSut({});
@@ -247,6 +267,29 @@ describe("Select", () => {
           expect(firstItemEl).toHaveAttribute("tabIndex", "0");
 
           await userEvnt.keyboard("{Tab}");
+
+          expect(onSelectMock).toHaveBeenCalledWith("1");
+        });
+      });
+    });
+
+    describe("and click in the item", () => {
+      it("calls the onSelect function", async () => {
+        const onSelectMock = vi.fn();
+
+        makeSut({ onSelect: onSelectMock });
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.click(firstItemEl);
 
           expect(onSelectMock).toHaveBeenCalledWith("1");
         });
