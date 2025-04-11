@@ -183,5 +183,167 @@ describe("Select", () => {
         });
       });
     });
+
+    describe("and press enter", () => {
+      it("calls the onSelect function", async () => {
+        const onSelectMock = vi.fn();
+
+        makeSut({ onSelect: onSelectMock });
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.keyboard("{Enter}");
+
+          expect(onSelectMock).toHaveBeenCalledWith("1");
+        });
+      });
+    });
+
+    describe("and press Space", () => {
+      it("calls the onSelect function", async () => {
+        const onSelectMock = vi.fn();
+
+        makeSut({ onSelect: onSelectMock });
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.keyboard("{Space}");
+
+          expect(onSelectMock).toHaveBeenCalledWith("1");
+        });
+      });
+    });
+
+    describe("and press Tab", () => {
+      it("calls the onSelect function", async () => {
+        const onSelectMock = vi.fn();
+
+        makeSut({ onSelect: onSelectMock });
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.keyboard("{Tab}");
+
+          expect(onSelectMock).toHaveBeenCalledWith("1");
+        });
+      });
+    });
+
+    describe("and press Escape", () => {
+      it("closes the select", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.queryByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.keyboard("{Escape}");
+
+          expect(firstItemEl).not.toBeInTheDocument();
+        });
+      });
+    });
+
+    describe("and press Backspace", () => {
+      it("closes the select", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const firstItemEl = screen.queryByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          await userEvnt.keyboard("{Backspace}");
+
+          expect(firstItemEl).not.toBeInTheDocument();
+        });
+      });
+    });
+
+    describe("and press Home", () => {
+      it("closes the select", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const lastItemEl = screen.getByRole("option", { name: /Item 3/i });
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          lastItemEl.focus();
+          expect(lastItemEl).toHaveFocus();
+
+          await userEvnt.keyboard("{Home}");
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+
+          expect(lastItemEl).not.toHaveFocus();
+          expect(lastItemEl).toHaveAttribute("tabIndex", "-1");
+        });
+      });
+    });
+
+    describe("and press End", () => {
+      it("closes the select", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+        userEvnt.click(buttonEl);
+
+        await waitFor(async () => {
+          const lastItemEl = screen.getByRole("option", { name: /Item 3/i });
+          const firstItemEl = screen.getByRole("option", { name: /Item 1/i });
+
+          expect(firstItemEl).toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "0");
+          await userEvnt.keyboard("{End}");
+
+          expect(lastItemEl).toHaveFocus();
+          expect(lastItemEl).toHaveAttribute("tabIndex", "0");
+
+          expect(firstItemEl).not.toHaveFocus();
+          expect(firstItemEl).toHaveAttribute("tabIndex", "-1");
+        });
+      });
+    });
   });
 });
