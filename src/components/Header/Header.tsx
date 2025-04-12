@@ -30,7 +30,6 @@ export const Header = () => {
             `cursor-pointer p-4 border-t-2 border-t-gray-900 text-gray-500 hover:text-white`,
             isActive && "border-t-2 border-t-primary-500 text-white"
           )}
-          data-active={isActive}
           key={item.redirect}
         >
           <Link href={item.redirect}>{item.name}</Link>
