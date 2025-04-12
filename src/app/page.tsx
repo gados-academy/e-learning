@@ -1,16 +1,15 @@
 import { Button } from "@/components/Button/Default/Button";
-import { Header } from "@/components/Header/Header";
+import { ArrowLeft } from "@phosphor-icons/react";
 
 export default function Home() {
   return (
     <div>
-      <Header />
-
       <Button
         text="Button"
         variant="tinted"
         color="danger"
         disabled
+        icon={<ArrowLeft />}
         iconPosition="start"
         onlyIcon
       />
