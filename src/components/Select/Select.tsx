@@ -133,7 +133,7 @@ export const Select = ({
           role="option"
           variant="ghost"
           text={item.label}
-          aria-selected={item.value === selectedItem}
+          aria-selected={item.label === selectedItem}
           onClick={() => handleSelect(item.value)}
           className="w-full !text-gray-700 justify-start"
           ref={(node) => assignRefAndFocusFirstRef(node, index)}

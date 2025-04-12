@@ -294,6 +294,33 @@ describe("Select", () => {
           expect(onSelectMock).toHaveBeenCalledWith("1");
         });
       });
+
+      it("updates the aria-selected attribute", async () => {
+        makeSut({});
+        const userEvnt = userEvent.setup();
+
+        const buttonEl = screen.getByRole("button");
+
+        await userEvnt.click(buttonEl);
+
+        const firstItemEl = await screen.findByRole("option", {
+          name: /Item 1/i,
+        });
+        await userEvnt.click(firstItemEl);
+
+        await waitFor(() => {
+          expect(
+            screen.queryByRole("option", { name: /Item 1/i }),
+          ).not.toBeInTheDocument();
+        });
+
+        await userEvnt.click(buttonEl);
+
+        // a variavel `firstItemEl` perde a referencia do html porque o select se fecha depois de clicar, se usar a mesma variavel aqui o teste falha
+        expect(
+          await screen.findByRole("option", { name: /Item 1/i }),
+        ).toHaveAttribute("aria-selected", "true");
+      });
     });
 
     describe("and press Escape", () => {
