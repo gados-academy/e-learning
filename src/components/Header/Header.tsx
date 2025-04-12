@@ -1,18 +1,14 @@
-import { useState } from "react";
+"use client";
+
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Typography } from "@/components/Typography/Typography";
 import { cn } from "@/lib/utils";
 
 export const Header = () => {
-  interface NavItem {
-    redirect: string;
-    name: string;
-  }
-
   const { t } = useTranslation();
-  const router = useRouter();
+  const pathname = usePathname();
 
   const navItems = [
     { redirect: "/", name: t("header:nav:home") },
@@ -22,47 +18,33 @@ export const Header = () => {
     { redirect: "/instructor", name: t("header:nav:instructor") },
   ];
 
-  function getActiveNavItem(navItems: NavItem[], currentPath: string) {
-    const currentNavItemIndex = navItems.findIndex(
-      (nav) => currentPath === nav.redirect
-    );
-    return currentNavItemIndex;
-  }
-
-  const [activeItem, setActiveItem] = useState(() =>
-    getActiveNavItem(navItems, router.pathname)
-  );
-
   const renderNavItems = () => {
-    return navItems.map((item, index) => {
-      const isActive = activeItem === index;
+    return navItems.map((item) => {
+      const isActive = pathname === item.redirect;
 
       return (
-        <li
+        <Typography
+          tag="li"
+          variant="text-body-md-500"
           className={cn(
-            `cursor-pointer p-3 border-2 border-gray-900 text-gray-500 hover:text-white`,
+            `cursor-pointer p-4 border-t-2 border-t-gray-900 text-gray-500 hover:text-white`,
             isActive && "border-t-2 border-t-primary-500 text-white"
           )}
           data-active={isActive}
           key={item.redirect}
-          onClick={() => setActiveItem(index)}
         >
-          <Link href={item.redirect}>
-            <Typography tag="a" variant="text-body-md-500">
-              {item.name}
-            </Typography>
-          </Link>
-        </li>
+          <Link href={item.redirect}>{item.name}</Link>
+        </Typography>
       );
     });
   };
 
   return (
-    <header className="flex items-center justify-between px-8 bg-gray-900 text-white">
+    <header className="flex items-center justify-between px-8 bg-gray-900">
       <nav>
-        <ul className="flex space-x-4">{renderNavItems()}</ul>
+        <ul className="flex gap-4">{renderNavItems()}</ul>
       </nav>
-      <div className="flex space-x-4">
+      <div className="flex gap-4">
         {/* TODO implementar componente de select */}
         <button>USD</button>
         <button>English</button>
