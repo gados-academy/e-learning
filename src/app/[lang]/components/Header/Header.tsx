@@ -1,26 +1,32 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Typography } from "@/components/Typography/Typography";
 import { cn } from "@/lib/utils";
+import { type getDictionary } from "@/i18n/get-dictionary";
+import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
 
-export const Header = () => {
-  const { t } = useTranslation();
+export const Header = ({
+  dictionary,
+  lang,
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>["header"];
+  lang: string;
+}) => {
   const pathname = usePathname();
 
   const navItems = [
-    { redirect: "/", name: t("header:nav:home") },
-    { redirect: "/courses", name: t("header:nav:courses") },
-    { redirect: "/about", name: t("header:nav:about") },
-    { redirect: "/contact", name: t("header:nav:contact") },
-    { redirect: "/instructor", name: t("header:nav:instructor") },
+    { redirect: `/${lang}`, name: dictionary.home },
+    { redirect: `/${lang}/courses`, name: dictionary.courses },
+    { redirect: `/${lang}/about`, name: dictionary.about },
+    { redirect: `/${lang}/contact`, name: dictionary.contact },
+    { redirect: `/${lang}/instructor`, name: dictionary.instructor },
   ];
 
   const renderNavItems = () => {
     return navItems.map((item) => {
-      const isActive = pathname === item.redirect;
+      const isActive = pathname.startsWith(item.redirect);
 
       return (
         <Typography
@@ -43,10 +49,10 @@ export const Header = () => {
       <nav>
         <ul className="flex gap-4">{renderNavItems()}</ul>
       </nav>
-      <div className="flex gap-4">
+      <div className="flex gap-4 text-white">
         {/* TODO implementar componente de select */}
         <button>USD</button>
-        <button>English</button>
+        <LocaleSwitcher />
       </div>
     </header>
   );
