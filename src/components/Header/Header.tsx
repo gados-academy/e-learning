@@ -17,11 +17,11 @@ export const Header = ({
   const pathname = usePathname();
 
   const navItems = [
-    { redirect: `/${lang}`, name: dictionary.home },
-    { redirect: `/${lang}/courses`, name: dictionary.courses },
-    { redirect: `/${lang}/about`, name: dictionary.about },
-    { redirect: `/${lang}/contact`, name: dictionary.contact },
-    { redirect: `/${lang}/instructor`, name: dictionary.instructor },
+    { redirect: `/${lang}`, name: dictionary.nav.home },
+    { redirect: `/${lang}/courses`, name: dictionary.nav.courses },
+    { redirect: `/${lang}/about`, name: dictionary.nav.about },
+    { redirect: `/${lang}/contact`, name: dictionary.nav.contact },
+    { redirect: `/${lang}/instructor`, name: dictionary.nav.instructor },
   ];
 
   const renderNavItems = () => {
