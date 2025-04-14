@@ -1,6 +1,6 @@
 import { getDictionary } from "@/i18n/get-dictionary";
 import { Locale } from "@/i18n/i18n-config";
-import { Header } from "@/app/[lang]/components/Header/Header";
+import { Header } from "@/components/Header/Header";
 import { Button } from "@/components/Button/Default/Button";
 
 export default async function Home({ params }: { params: { lang: Locale } }) {

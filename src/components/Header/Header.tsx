@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Typography } from "@/components/Typography/Typography";
 import { cn } from "@/lib/utils";
 import { type getDictionary } from "@/i18n/get-dictionary";
-import LocaleSwitcher from "../LocaleSwitcher/LocaleSwitcher";
+import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
 
 export const Header = ({
   dictionary,
