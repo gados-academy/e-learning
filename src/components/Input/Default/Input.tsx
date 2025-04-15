@@ -1,12 +1,7 @@
 import { IconPhosphor } from "@/components/Icon/Icon";
 import { cn } from "@/lib/utils";
 import * as React from "react";
-type Status = "success" | "error" | undefined;
-interface InputProps extends React.ComponentProps<"input"> {
-  icon?: React.ReactNode;
-  rigthComponent?: React.ReactNode;
-  status?: Status;
-}
+import { InputProps } from "./Input.types";
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
