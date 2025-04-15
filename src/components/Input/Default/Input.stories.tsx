@@ -8,7 +8,7 @@ const meta: Meta<typeof Input> = {
   argTypes: {
     type: {
       control: "select",
-      options: ["text", "email", "password", "number"],
+      options: ["text", "password", "number"],
     },
     status: {
       control: "select",
