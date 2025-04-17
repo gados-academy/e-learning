@@ -22,6 +22,10 @@ const config: StorybookConfig = {
     "../public"
   ],
 
+  features: {
+    experimentalRSC: true,
+  },
+  
   docs: {
     autodocs: true
   },
