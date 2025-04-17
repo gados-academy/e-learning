@@ -1,11 +1,11 @@
 import type { Preview } from "@storybook/react";
-import "@/app/globals.css";
-import "@/i18n";
+import "@/app/[lang]/globals.css";
 import {
   getRouter,
   usePathname,
 } from "@storybook/nextjs/navigation.mock";
 import mockRouter from "next-router-mock";
+import { i18n } from "../src/i18n/i18n-config";
 
 const preview: Preview = {
   parameters: {
@@ -27,7 +27,21 @@ const preview: Preview = {
       (...args: Parameters<typeof mockRouter.replace>) =>
         mockRouter.replace(...args)
     );
-    usePathname.mockImplementation(() => mockRouter.pathname);
+
+    usePathname.mockImplementation(() => {
+      const pathname = mockRouter.pathname || `/${i18n.defaultLocale}`;
+      const segments = pathname.split("/");
+      const isLocaleMissing = i18n.locales.every(
+        (locale) =>
+          !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+      );
+
+      if (isLocaleMissing) {
+        segments[1] = i18n.defaultLocale;
+      }
+
+      return segments.join("/");
+    });
   },
 };
 
