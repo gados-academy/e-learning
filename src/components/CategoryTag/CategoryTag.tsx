@@ -9,18 +9,12 @@ const categoryTagVariants = cva(
   {
     variants: {
       type: {
-        default: "bg-primary-400",
-        business: "bg-orange-500",
-        finance: "bg-green-500",
-        it: "bg-blue-500",
-        personalDevelopment: "bg-purple-500",
-        productivity: "bg-pink-500",
-        marketing: "bg-red-500",
-        photography: "bg-yellow-500",
-        lifestyle: "bg-teal-500",
-        design: "bg-gray-500",
-        health: "bg-indigo-500",
-        music: "bg-cyan-500",
+        purple: "bg-secondary-100 text-secondary-700",
+        green: "bg-success-100 text-success-700",
+        yellow: "bg-warning-100 text-warning-800",
+        red: "bg-danger-100 text-danger-700",
+        orange: "bg-primary-100 text-primary-700",
+        gray: "bg-gray-50 text-gray-900",
       }
     }
   }
@@ -34,7 +28,6 @@ export interface CategoryTagProps
 
 const CategoryTag = React.forwardRef<HTMLDivElement, CategoryTagProps>(
   ({ className, children, type, ...props }, ref) => {
-    // const Comp = asChild ? 'span' : 'div';
     const Comp = 'div';
     return (
       <Comp
