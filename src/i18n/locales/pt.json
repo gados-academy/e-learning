@@ -1,0 +1,12 @@
+{
+  "header": {
+    "language": "Português",
+    "nav": {
+      "home": "Início",
+      "courses": "Cursos",
+      "about": "Sobre",
+      "contact": "Contato",
+      "instructor": "Torne-se um instrutor"
+    }
+  }
+}

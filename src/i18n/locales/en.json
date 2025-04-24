@@ -1,0 +1,12 @@
+{
+  "header": {
+    "language": "English",
+    "nav": {
+      "home": "Home",
+      "courses": "Courses",
+      "about": "About",
+      "contact": "Contact",
+      "instructor": "Become an instructor"
+    }
+  }
+}
