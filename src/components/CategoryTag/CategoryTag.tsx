@@ -1,5 +1,4 @@
 import { Typography } from '@/components/Typography/Typography'
-// import { CategoryTagProps } from '@/components/CategoryTag/CategoryTag.types';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 import React from 'react';
