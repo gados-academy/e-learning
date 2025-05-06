@@ -1,17 +1,21 @@
-import { Button } from "@/components/Button/Default/Button";
-import { ArrowLeft } from "@phosphor-icons/react";
+"use client";
+
+import { IconPhosphor } from "@/components/Icon/Icon";
+import { Input } from "@/components/Input/Default/Input";
 
 export default function Home() {
   return (
     <div>
-      <Button
-        text="Button"
-        variant="tinted"
-        color="danger"
-        disabled
-        icon={<ArrowLeft />}
-        iconPosition="start"
-        onlyIcon
+      <Input
+        placeholder="Enter text here"
+        icon={<IconPhosphor name="Chats" />}
+        status="success"
+        rightComponent={
+          <IconPhosphor
+            name="ArrowRight"
+            className="text-gray-500 cursor-pointer"
+          />
+        }
       />
     </div>
   );

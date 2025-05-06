@@ -4,16 +4,20 @@ import { IconProps } from "@phosphor-icons/react";
 
 export type IconPhosphorName = keyof typeof PhosphorIcons;
 
-type IconPhosphorProps = {
+export type IconPhosphorProps = {
   name: IconPhosphorName;
   size?: number;
   color?: string;
+  className?: string;
+  weight?: "fill" | "light" | "thin" | "regular" | "bold";
 };
 
 export const IconPhosphor: React.FC<IconPhosphorProps> = ({
   name,
   size = 24,
   color = "currentColor",
+  className,
+  weight,
 }) => {
   const SpecificIcon = PhosphorIcons[name] as React.ElementType<IconProps>;
 
@@ -21,5 +25,12 @@ export const IconPhosphor: React.FC<IconPhosphorProps> = ({
     return null;
   }
 
-  return <SpecificIcon size={size} color={color} />;
+  return (
+    <SpecificIcon
+      className={`pointer-events-none ${className}`}
+      size={size}
+      color={color}
+      weight={weight}
+    />
+  );
 };
