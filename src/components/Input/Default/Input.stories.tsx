@@ -24,7 +24,7 @@ const meta: Meta<typeof Input> = {
     status: undefined,
 
     icon: <IconPhosphor name="User" weight="fill" />,
-    rigthComponent: <IconPhosphor name="Acorn" />,
+    rightComponent: <IconPhosphor name="Acorn" />,
 
     placeholder: "Placeholder",
   },

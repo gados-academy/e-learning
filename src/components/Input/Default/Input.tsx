@@ -5,7 +5,7 @@ import { InputProps } from "./Input.types";
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, rigthComponent, type = "text", icon, status, ...props },
+    { className, rightComponent, type = "text", icon, status, ...props },
     ref
   ) => {
     const [focused, setFocused] = React.useState(false);
@@ -61,7 +61,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           {...props}
         />
-        {focused && rigthComponent ? rigthComponent : renderStatusIcon()}
+        {focused && rightComponent ? rightComponent : renderStatusIcon()}
       </div>
     );
   }

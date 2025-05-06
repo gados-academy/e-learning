@@ -10,7 +10,7 @@ export default function Home() {
         placeholder="Enter text here"
         icon={<IconPhosphor name="Chats" />}
         status="success"
-        rigthComponent={
+        rightComponent={
           <IconPhosphor
             name="ArrowRight"
             className="text-gray-500 cursor-pointer"

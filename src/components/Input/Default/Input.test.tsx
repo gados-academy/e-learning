@@ -44,7 +44,7 @@ describe("Input", () => {
     const RightComponent = () => <span>Right</span>;
     makeSut({
       placeholder: "Type something...",
-      rigthComponent: <RightComponent />,
+      rightComponent: <RightComponent />,
     });
     const input = screen.getByPlaceholderText("Type something...");
     expect(screen.queryByText("Right")).not.toBeInTheDocument();
